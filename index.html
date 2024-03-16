@@ -7,16 +7,16 @@
 
 <!--
   Author: Eric Wortman
-  Project: Matchmaker Lite
+  Project: Matchmaker
 
   All Rights Reserved
 -->
 
 <body>
-  <h1>Matchmaker Lite</h1>
-  <p>Instructions</p>
+  <h1>Matchmaker</h1>
+  <p>Welcome to what may be the most important survery of you life. </p>
 
-  <label for="q1">Football is more fun to watch than hockey.</label>  
+  <label for="q1">I can be a pretty picky eater.</label><br /> 
   <select id="q1">
     <option value="5">Strongly Agree</option>
     <option value="4">Agree</option>
@@ -27,38 +27,38 @@
 
 
 <br /><br /><br />
-<label for="q2">Football is more fun to watch than hockey.</label>
-<select id="q2">
-  <option value="5">Strongly Agree</option>
-  <option value="4">Agree</option>
-  <option value="3">Neither agree nor disagree</option>
-  <option value="2">Disagree</option>
-  <option value="1">Strongly Disagree</option>
-</select>
+  <label for="q2">Football is more fun to watch than ice hockey.</label><br />
+  <select id="q2">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
 
 
 <br /><br /><br />
-<label for="q3">Football is more fun to watch than hockey.</label>
-<select id="q3">
-  <option value="5">Strongly Agree</option>
-  <option value="4">Agree</option>
-  <option value="3">Neither agree nor disagree</option>
-  <option value="2">Disagree</option>
-  <option value="1">Strongly Disagree</option>
-</select>
+  <label for="q3">Going for a hike is a great way to spend a day.</label><br />
+  <select id="q3">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
 
 <br /><br /><br />
-<label for="q4">Football is more fun to watch than hockey.</label>
-<select id="q4">
-  <option value="5">Strongly Agree</option>
-  <option value="4">Agree</option>
-  <option value="3">Neither agree nor disagree</option>
-  <option value="2">Disagree</option>
-  <option value="1">Strongly Disagree</option>
-</select>
+  <label for="q4">One should always be nice to the waitstaff.</label><br />
+  <select id="q4">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neither agree nor disagree</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
 
-  <br /><br /><br />
-  <label for="q5">Football is more fun to watch than hockey.</label>
+<br /><br /><br />
+  <label for="q5">You're never going to give me up; you're never going to let me down.</label><br />
   <select id="q5">
     <option value="5">Strongly Agree</option>
     <option value="4">Agree</option>
@@ -69,23 +69,127 @@
 
 
   <br /><br /><br />
-  <button onclick="calculateCompatability()">Calculate Compatability</button>
-  <p id="compatability"></p>
+  <button onclick="calculateCompatibility()">Calculate Compatibility</button>
+	<p id="compatibility"></p>
+  <img id="compatibility-image" src="" alt="Compatibility Image" style="display: none;">
 
+  <!--
+    
+  hiding broken link butom style="display: none" and then making its display to be conditional on button click with compatibilityImageElement.style.display = "inline"
+    - this fixed my main issue
+  --> 
 <script>
-console.log("Starting Matchmaker Lite");
+console.log("Starting Matchmaker");
 
-function calculateCompatability(){
-  console.log("calculateCompatabilty()");
+function calculateCompatibility() {
+  console.log("calculateCompatibilty()");
 
-  document.getElementById("compatability").innerHTML = "Your compatabilty is...";
+  const DESIRED_RESPONSE = [
+      2, 
+      2,
+      5,
+      5,
+      5,
+  ]
+
+  const MAX_SCORE = 25;
+
+  // Get current values from dropdown
+
+  let question1Response = document.getElementById("q1").selectedOptions[0].value;
+  let question2Response = document.getElementById("q2").selectedOptions[0].value;
+  let question3Response = document.getElementById("q3").selectedOptions[0].value;
+  let question4Response = document.getElementById("q4").selectedOptions[0].value;
+  let question5Response = document.getElementById("q5").selectedOptions[0].value;
+
+  // optionally lof the values associated with question 1-5 to console
+  
+  console.log("Question 1 Answers:");
+	console.log(document.getElementById("q1").selectedOptions[0].text);
+	console.log(document.getElementById("q1").selectedOptions[0].value);
+	console.log(question1Response);
+
+  console.log("Question 2 Answers:");
+	console.log(document.getElementById("q2").selectedOptions[0].text);
+	console.log(document.getElementById("q2").selectedOptions[0].value);
+	console.log(question2Response);
+
+  console.log("Question 3 Answers:");
+	console.log(document.getElementById("q3").selectedOptions[0].text);
+	console.log(document.getElementById("q3").selectedOptions[0].value);
+	console.log(question3Response);
+
+  console.log("Question 4 Answers:");
+	console.log(document.getElementById("q4").selectedOptions[0].text);
+	console.log(document.getElementById("q4").selectedOptions[0].value);
+	console.log(question4Response);
+
+  console.log("Question 5 Answers:");
+	console.log(document.getElementById("q5").selectedOptions[0].text);
+	console.log(document.getElementById("q5").selectedOptions[0].value);
+	console.log(question5Response);
+
+  // Calculate compatibility scores 
+  let question1Compatibility = 5 - Math.abs(question1Response - DESIRED_RESPONSE[0])
+  let question2Compatibility = 5 - Math.abs(question2Response - DESIRED_RESPONSE[1]) 
+  let question3Compatibility = 5 - Math.abs(question3Response - DESIRED_RESPONSE[2]) 
+  let question4Compatibility = 5 - Math.abs(question4Response - DESIRED_RESPONSE[3]) 
+  let question5Compatibility = 5 - Math.abs(question5Response - DESIRED_RESPONSE[4]) 
+
+
+  console.log("c1="+question1Compatibility);
+  console.log("c2="+question2Compatibility);
+  console.log("c3="+question3Compatibility);
+  console.log("c4="+question4Compatibility);
+  console.log("c5="+question5Compatibility);
+
+  // calculate total compatibility
+  let totalCompatibility = question1Compatibility + question2Compatibility + question3Compatibility + question4Compatibility + question5Compatibility;
+
+  // Convert compatilbilty into %
+  totalCompatibility *= 100 / MAX_SCORE;
+	totalCompatibility = Math.round(totalCompatibility);
+	console.log("tc="+ totalCompatibility);
+
+
+
+
+
+// Get the element where you want to display the message
+var compatibilityElement = document.getElementById("compatibility");
+
+
+var compatibilityImageElement = document.getElementById("compatibility-image");
+
+
+
+// Conditional statements to determine the image based on totalCompatibility
+if (totalCompatibility >= 70) {
+    compatibilityImageElement.src = "drake-yes.png";
+    compatibilityImageElement.style.display = "inline"
+} 
+else {
+    compatibilityImageElement.src = "drake-no.png";
+    compatibilityImageElement.style.display = "inline"
 }
 
-  
+
+
+
+// Conditional statements to determine the message based on totalCompatibility
+if (totalCompatibility >= 90) {
+    compatibilityElement.innerHTML = totalCompatibility + "! The universe has spoken, I'll call the wedding planner!";
+} else if (totalCompatibility >= 70) {
+    compatibilityElement.innerHTML = totalCompatibility + "! This is a promising start to something great.";
+} else if (totalCompatibility >= 60) {
+    compatibilityElement.innerHTML = totalCompatibility + " ...Let's not waste each others time.";
+} else {
+    compatibilityElement.innerHTML = totalCompatibility + "! We probably shouldn't even be in the same room together.";
+}
+
+
+}
 
 </script>
-
 </body>
 </html>
-  
-    
