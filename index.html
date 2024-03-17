@@ -14,7 +14,7 @@
 
 <body>
   <h1>Matchmaker</h1>
-  <p>Welcome to what may be the most important survery of you life. </p>
+  <p>Welcome to what may be the most important survery of you life. Thanks to modern science we have the ability to determine the compatability of two people by simply answering just FIVE questions. The following questions rely on your honest answers, you simply have to click the drop down menu and select your answer. The answers range from "Strongly Agree" to "Strongly Disagree". Once you have selected all five answers, say a quick prayer, and click the "Calculate Compatibility" button to let the universe decide our destiny. Good Luck!</p>
 
   <label for="q1">I can be a pretty picky eater.</label><br /> 
   <select id="q1">
@@ -178,13 +178,13 @@ else {
 
 // Conditional statements to determine the message based on totalCompatibility
 if (totalCompatibility >= 90) {
-    compatibilityElement.innerHTML = totalCompatibility + "! The universe has spoken, I'll call the wedding planner!";
+    compatibilityElement.innerHTML = totalCompatibility + "%! The universe has spoken, I'll call the wedding planner!";
 } else if (totalCompatibility >= 70) {
-    compatibilityElement.innerHTML = totalCompatibility + "! This is a promising start to something great.";
+    compatibilityElement.innerHTML = totalCompatibility + "%! This is a promising start to something great.";
 } else if (totalCompatibility >= 60) {
-    compatibilityElement.innerHTML = totalCompatibility + " ...Let's not waste each others time.";
+    compatibilityElement.innerHTML = totalCompatibility + " %...Let's not waste each others time.";
 } else {
-    compatibilityElement.innerHTML = totalCompatibility + "! We probably shouldn't even be in the same room together.";
+    compatibilityElement.innerHTML = totalCompatibility + "%! We probably shouldn't even be in the same room together.";
 }
 
 
